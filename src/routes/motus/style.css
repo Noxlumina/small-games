@@ -1,0 +1,16 @@
+.scrabbletilescontainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .scrabbletile {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
