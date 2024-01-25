@@ -21,7 +21,7 @@ const FairPrice = () => {
     setUserInput("");
     setPreviousGuesses([]);
     setError("");
-    setLives(5);
+    setLives(10);
     setWin(false);
     generateRandomNumber();
   };
