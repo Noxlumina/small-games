@@ -18,12 +18,12 @@ const FairPrice = () => {
   const [win, setWin] = useState(false);
 
   const resetGame = () => {
-    setUserInput("");
     setPreviousGuesses([]);
     setError("");
     setLives(10);
     setWin(false);
     generateRandomNumber();
+    setUserInput("");
   };
 
   const handleInputChange = (e) => {
@@ -50,25 +50,24 @@ const FairPrice = () => {
   };
 
   const handleBlur = () => {
-    try {
-      const parsedInput = parseInt(userInput, 10);
-      if (
-        !isNaN(parsedInput) &&
-        parsedInput >= 1 &&
-        parsedInput <= 1000 &&
-        lives > 0
-      ) {
-        setError("");
-      } else if (lives === 0) {
-        setError("You have no lives left, Lost!");
-      } else {
-        setError("Please enter a number between 1 and 1000.");
+    if (lives > 0) {
+      try {
+        const parsedInput = parseInt(userInput, 10);
+        if (
+          !isNaN(parsedInput) &&
+          parsedInput >= 1 &&
+          parsedInput <= 1000
+        ) {
+          setError("");
+        } else {
+          setError("Please enter a number between 1 and 1000.");
+        }
+      } catch (error) {
+        console.error("Error parsing input:", error);
+        setError("Error parsing input. Please enter a valid number.");
       }
-    } catch (error) {
-      console.error("Error parsing input:", error);
-      setError("Error parsing input. Please enter a valid number.");
     }
-  };
+  };  
 
   const handleGuessClick = () => {
     try {
