@@ -45,6 +45,31 @@ const FairPrice = () => {
     : "Less";
   }
 
+  const handleFocus = () => {
+    setError(""); 
+  };
+
+  const handleBlur = () => {
+    try {
+      const parsedInput = parseInt(userInput, 10);
+      if (
+        !isNaN(parsedInput) &&
+        parsedInput >= 1 &&
+        parsedInput <= 1000 &&
+        lives > 0
+      ) {
+        setError("");
+      } else if (lives === 0) {
+        setError("You have no lives left, Lost!");
+      } else {
+        setError("Please enter a number between 1 and 1000.");
+      }
+    } catch (error) {
+      console.error("Error parsing input:", error);
+      setError("Error parsing input. Please enter a valid number.");
+    }
+  };
+
   const handleGuessClick = () => {
     try {
       const parsedInput = parseInt(userInput, 10);
@@ -71,9 +96,9 @@ const FairPrice = () => {
         setError("");
         handleLives(parsedInput);
       } else if (lives === 0) {
-        setError("Vous n'avez plus de vies restantes, Perdu !");
+        setError("You have no lives left, Lost!");
       } else {
-        setError("Veuillez saisir un nombre entre 1 et 1000.");
+        setError("Please enter a number between 1 and 1000.");
       }
     } catch (error) {
       console.error("Error parsing input:", error);
@@ -115,6 +140,8 @@ const FairPrice = () => {
           placeholder="your proposition"
           value={userInput}
           onChange={handleInputChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
           className={error ? style.error : ""}
           disabled={win}
           onKeyPress={(e) => {
